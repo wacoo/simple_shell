@@ -11,12 +11,11 @@ char **prompt(ssize_t *noc, int *is_pipe)
 {
         char *buf, *parsed1, *parsed2, **spch;
         size_t s = 0;
-        int b, cnt, pipe_cnt;
-	printf(":> ");
+        int b, pipe_cnt;
+	printf("$ ");
 
 	spch = NULL;
 	*noc = getline(&buf, &s, stdin);
-	cnt = wrd_cnt(buf, ' ');
 	pipe_cnt = wrd_cnt(buf, '|');
         if (*noc > 0)
         {

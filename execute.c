@@ -31,12 +31,11 @@ void exec_com(char **com, ssize_t *noc)
 }
 /**
  * pipe_exe2 - pipe in
- * @pid2: pid
  * @fd: file desctiptor
  * @com2: commnad str
  * @noc: no of char
  */
-void pipe_exe2(pid_t pid2, int *fd, char **com2, ssize_t *noc)
+void pipe_exe2(int *fd, char **com2, ssize_t *noc)
 {
 	close(fd[1]);
 	dup2(fd[0], STDIN_FILENO);
@@ -49,13 +48,12 @@ void pipe_exe2(pid_t pid2, int *fd, char **com2, ssize_t *noc)
 }
 /**
  * pipe_exe1 - pipe out
- * @pid: pid
  * @fd: file desctiptor
  * @com: commnad str
  * @noc: no of chars
  */
 
-void pipe_exe1(pid_t pid, int *fd, char **com, ssize_t *noc)
+void pipe_exe1(int *fd, char **com, ssize_t *noc)
 {
 	close(fd[0]);
 	dup2(fd[1], STDOUT_FILENO);
@@ -90,7 +88,7 @@ void exec_com_pipe(char **com, char **com2, ssize_t *noc)
 	}
 	else if (pid == 0)
 	{
-		pipe_exe1(pid, pfd, com, noc);
+		pipe_exe1(pfd, com, noc);
 	}
 	else
 	{
@@ -102,7 +100,7 @@ void exec_com_pipe(char **com, char **com2, ssize_t *noc)
 		}
 		if (pid2 == 0)
 		{
-			pipe_exe2(pid2, pfd, com2, noc);
+			pipe_exe2(pfd, com2, noc);
 		}
 		else
 		{

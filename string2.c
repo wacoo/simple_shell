@@ -96,7 +96,7 @@ char *parse(char *str)
 {
 	static int flag = 0, x, t = 0;
 	int counter = 0;
-	int st = 0, i = 0, j, sc = 0, k = 0;
+	int i = 0, k = 0;
 
 	if (str == NULL)
 	{
